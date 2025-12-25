@@ -89,7 +89,7 @@ The system includes an institutional-grade strategy that trades only when there 
 
 | Metric | Result (Out-of-Sample) | Analysis |
 | :--- | :--- | :--- |
-| **Max Equity (HWM)**| **$12,025.56** | Peak account value reached during backtest. |
+| **Test Duration** | **~2 Years (735 Days)** | Total time for the 152 high-conviction trades. |
 | **Net Profit** | **$906.37** | Positive drift in return distribution. |
 | **Win Rate** | **48.7%** | Precision over quantity—trades only high-quality distributions. |
 | **Profit Factor** | **1.09** | Gross profit is 1.09x larger than gross loss. |

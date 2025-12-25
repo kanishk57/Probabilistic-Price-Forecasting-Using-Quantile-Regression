@@ -34,7 +34,7 @@ Point price predictions fail under non-stationary market conditions. This projec
 
 | Metric             | Value                         |
 | ------------------ | ----------------------------- |
-| **Max Equity (HWM)**| **$12,025.56**                |
+| **Test Duration**  | **~2 Years (735 Days)**       |
 | **Net Profit**     | **$906.37**                   |
 | **Total ROI**      | **+9.06%**                    |
 | **Max Drawdown**   | **$1,368.90** (~11%)          |

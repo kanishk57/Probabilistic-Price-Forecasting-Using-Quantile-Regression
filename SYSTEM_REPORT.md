@@ -93,10 +93,13 @@ While the model is near-random at predicting exact direction, it is **highly cal
 
 ---
 
-## 5. Strategy ![Performance Dashboard](results/backtest_dashboard_viz.png)
+## 5. Strategy Performance (Trading Evaluation)
 
 ### 5.1 Equity Curves
 The primary growth trajectory shows the effectiveness of confidence-filtered entries.
+
+**Full Performance Breakdown:**
+![Institutional Backtest Dashboard](results/backtest_dashboard_viz.png)
 
 **Standard Equity Curve (Trade-based):**
 ![Standard Equity Curve](results/equity_curve.png)

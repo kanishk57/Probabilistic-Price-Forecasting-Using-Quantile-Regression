@@ -153,6 +153,9 @@ def run_institutional_backtest():
             
             capital += actual_pnl
             
+            risk_usd = capital * actual_risk
+            r_multiple = actual_pnl / risk_usd if risk_usd > 0 else 0
+            
             trades.append({
                 'entry_time': entry_time,
                 'exit_time': exit_time,
@@ -161,6 +164,8 @@ def run_institutional_backtest():
                 'exit': exit_price,
                 'reason': exit_reason,
                 'pnl_usd': actual_pnl,
+                'risk_usd': risk_usd,
+                'r_multiple': r_multiple,
                 'capital': capital,
                 'risk_mult': risk_multiplier
             })
@@ -173,19 +178,38 @@ def run_institutional_backtest():
     # 6. Performance Summary
     trade_df = pd.DataFrame(trades)
     if len(trade_df) > 0:
+        # Calculate R-multiples
+        # Risk amount was capital * actual_risk at time of entry
+        # We need to capture that or recalculate. 
+        # I'll add 'risk_usd' to the trade recording to be precise.
+        
         win_rate = (trade_df['pnl_usd'] > 0).mean()
         total_pnl = trade_df['pnl_usd'].sum()
         max_drawdown = (trade_df['capital'].cummax() - trade_df['capital']).max()
+        
+        # New Metrics
+        gross_profit = trade_df[trade_df['pnl_usd'] > 0]['pnl_usd'].sum()
+        gross_loss = abs(trade_df[trade_df['pnl_usd'] < 0]['pnl_usd'].sum())
+        profit_factor = gross_profit / gross_loss if gross_loss > 0 else np.inf
+        
+        expectancy = total_pnl / len(trade_df)
+        
+        # Calculate R-multiples (PnL / Initial Risk)
+        # In our case, initial risk was (capital_at_entry * actual_risk)
+        # We'll approximate from recorded PnL and risk_mult if needed, 
+        # but better to record it. I'll update the loop.
         
         print("\n" + "-" * 40)
         print("INSTITUTIONAL STRATEGY RESULTS")
         print("-" * 40)
         print(f"Total Trades:      {len(trade_df)}")
         print(f"Win Rate:         {win_rate:.1%}")
+        print(f"Profit Factor:    {profit_factor:.2f}")
+        print(f"Expectancy:       ${expectancy:.2f} per trade")
         print(f"Total PnL (USD):  ${total_pnl:,.2f}")
         print(f"Return on Account: {total_pnl/INITIAL_CAPITAL:.2%}")
+        print(f"Avg R-Multiple:   {trade_df['r_multiple'].mean():.2f}R")
         print(f"Max Drawdown:     ${max_drawdown:,.2f}")
-        print(f"Avg Risk Mult:    {trade_df['risk_mult'].mean():.2f}x")
         print("-" * 40)
         
         # Save results

@@ -32,15 +32,17 @@ Point price predictions fail under non-stationary market conditions. This projec
 
 **Headline Results (Out-of-Sample)**
 
-| Metric         | Value                         |
-| -------------- | ----------------------------- |
-| **Total ROI**  | **+9.06%**                    |
-| **Max Drawdown**| **$1,368.90** (~11%)          |
-| **Trades**     | 152                           |
-| **Win Rate**   | 48.7%                         |
-| **Profit Factor**| 1.09                        |
-| **Expectancy** | **+$5.96 / trade**            |
-| **Capital Breach**| ❌ Never below initial $10,000 |
+| Metric             | Value                         |
+| ------------------ | ----------------------------- |
+| **Max Equity (HWM)**| **$12,025.56**                |
+| **Net Profit**     | **$906.37**                   |
+| **Total ROI**      | **+9.06%**                    |
+| **Max Drawdown**   | **$1,368.90** (~11%)          |
+| **Profit Factor**  | **1.09**                      |
+| **Expectancy**     | **$5.96 / trade**             |
+| **Win Rate**       | **48.7%**                     |
+| **Total Trades**   | **152**                       |
+| **Capital Breach** | ❌ Never below initial $10,000 |
 
 **One-line takeaway**  
 The system demonstrates a statistically positive edge when trading selectively based on forecast uncertainty.

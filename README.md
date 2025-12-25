@@ -89,11 +89,13 @@ The system includes an institutional-grade strategy that trades only when there 
 
 | Metric | Result (Out-of-Sample) | Analysis |
 | :--- | :--- | :--- |
+| **Max Equity (HWM)**| **$12,025.56** | Peak account value reached during backtest. |
+| **Net Profit** | **$906.37** | Positive drift in return distribution. |
 | **Win Rate** | **48.7%** | Precision over quantity—trades only high-quality distributions. |
 | **Profit Factor** | **1.09** | Gross profit is 1.09x larger than gross loss. |
 | **Expectancy** | **$5.96** | Mathematically positive edge per trade. |
-| **Total ROI** | **+9.06%** | Solid $906 profit on a $10k account ($152 trades). |
-| **Drawdown** | **$1,368.90** | Managed via model-informed partial exits. |
+| **Total ROI** | **+9.06%** | Solid capital growth on a $10k account ($152 trades). |
+| **Max Drawdown** | **$1,368.90** | Managed via model-informed partial exits. |
 
 **Final Equity Curves:**
 ![Institutional Strategy Equity Curve](results/equity_curve.png)

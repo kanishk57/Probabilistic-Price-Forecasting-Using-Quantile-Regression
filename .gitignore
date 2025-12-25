@@ -1,0 +1,19 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+.env
+
+# Data and Models
+data/
+models/*.joblib
+models/*.pkl
+results/*.csv
+results/*.html
+results/*.png
+
+# IDEs
+.vscode/
+.idea/
+.DS_Store

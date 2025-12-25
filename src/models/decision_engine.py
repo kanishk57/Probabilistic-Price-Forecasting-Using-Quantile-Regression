@@ -3,30 +3,45 @@ import numpy as np
 
 class DecisionEngine:
     """
-    Translates quantile forecasts into trading decisions.
+    Translates quantile forecasts into institutional-grade trading decisions.
+    Focuses on uncertainty quantification and payoff asymmetry.
     """
-    def __init__(self, median_threshold=0.0005, risk_buffer=0.0002):
-        self.median_threshold = median_threshold  # Minimum 0.05% expected move
-        self.risk_buffer = risk_buffer            # Minimum buffer on the "wrong" side
+    def __init__(self, median_threshold=0.0005, asymmetry_k=1.5, confidence_p=0.6):
+        self.median_threshold = median_threshold  # Directional conviction
+        self.asymmetry_k = asymmetry_k            # upside > k * downside
+        self.confidence_p = confidence_p          # range_width percentile filter
         
-    def generate_signal(self, predictions: pd.DataFrame) -> pd.Series:
+    def generate_signal(self, df: pd.DataFrame) -> pd.Series:
         """
         Input: DataFrame with q_0.1, q_0.5, q_0.9
         Output: Series with 1 (Long), -1 (Short), or 0 (Hold)
         """
-        signals = pd.Series(0, index=predictions.index)
+        # 1. Basic metrics
+        range_width = df['q_0.9'] - df['q_0.1']
+        upside = df['q_0.9']
+        downside = df['q_0.1']
         
-        # Long Logic:
-        # 1. Median forecast is bullish enough
-        # 2. Lower bound (10th percentile) is not deeply negative (manageable risk)
-        long_mask = (predictions['q_0.5'] > self.median_threshold) & \
-                    (predictions['q_0.1'] > -self.risk_buffer)
+        # 2. Confidence Filter (Trade only when range is high compared to history)
+        # Using a rolling window to determine the 'typical' range
+        rolling_range_q = range_width.rolling(window=1000).quantile(self.confidence_p)
         
-        # Short Logic:
-        # 1. Median forecast is bearish enough
-        # 2. Upper bound (90th percentile) is not deeply positive
-        short_mask = (predictions['q_0.5'] < -self.median_threshold) & \
-                     (predictions['q_0.9'] < self.risk_buffer)
+        signals = pd.Series(0, index=df.index)
+        
+        # LONG Entry Logic:
+        # 1. Directional Conviction: Median forecast > threshold
+        # 2. Asymmetric Payoff: Predicted upside > k * abs(predicted downside)
+        # 3. Sufficient Confidence: Current forecast range > historical p-percentile
+        long_mask = (df['q_0.5'] > self.median_threshold) & \
+                    (upside > (self.asymmetry_k * abs(downside))) & \
+                    (range_width > rolling_range_q)
+        
+        # SHORT Entry Logic:
+        # 1. Directional Conviction: Median forecast < -threshold
+        # 2. Asymmetric Payoff: Predicted downside < -k * predicted upside
+        # 3. Sufficient Confidence: Current forecast range > historical p-percentile
+        short_mask = (df['q_0.5'] < -self.median_threshold) & \
+                     (abs(downside) > (self.asymmetry_k * upside)) & \
+                     (range_width > rolling_range_q)
         
         signals[long_mask] = 1
         signals[short_mask] = -1

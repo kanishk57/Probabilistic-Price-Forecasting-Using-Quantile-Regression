@@ -83,6 +83,20 @@ These three together form a **confidence interval** for future price movement.
 
 ---
 
+### Performance & Results (Institutional V3)
+
+The system includes an institutional-grade strategy that trades only when there is an asymmetric payoff and high distribution confidence.
+
+| Metric | Result (Out-of-Sample) | Analysis |
+| :--- | :--- | :--- |
+| **Win Rate** | **48.7%** | Steady performance with high Reward/Risk focus. |
+| **Profit Factor** | **1.09** | Gross profit is 1.09x larger than gross loss. |
+| **Expectancy** | **$5.96** | Mathematically positive edge per trade. |
+| **Total ROI** | **+9.06%** | Solid $906 profit on a $10k account ($152 trades). |
+| **Drawdown** | **$1,368.90** | Volatility managed via model-informed partial exits. |
+
+---
+
 ### Usage
 
 1. **Install Dependencies**:
@@ -90,13 +104,12 @@ These three together form a **confidence interval** for future price movement.
    pip install -r requirements.txt
    ```
 
-2. **Run Training & Forecast**:
+2. **Run Institutional Backtest**:
    ```bash
-   # Train on last 50,000 candles and forecast 1 hour ahead
-   python scripts/train_quantile_model.py --limit 50000 --horizon 4
+   # Executes the v3 strategy with partial exits and dynamic SL/TP
+   python scripts/run_institutional_backtest.py
    ```
 
 3. **Check Output**:
-   - Models saved to `models/`
-   - Console output showing coverage metrics and example forecasts.
-
+   - Detailed logs: `results/institutional_backtest.csv`
+   - Forecast View: `results/forecast_viz.html`

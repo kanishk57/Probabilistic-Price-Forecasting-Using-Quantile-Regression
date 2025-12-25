@@ -101,8 +101,6 @@ The system includes an institutional-grade strategy that trades only when there 
 ![Institutional Strategy Equity Curve](results/equity_curve.png)
 ![Smoother Institutional Equity Curve](results/final_equity_curve.png)
 
-**Detailed Performance Dashboard:**
-![Trading Dashboard KPIs](results/backtest_dashboard_viz.png)
 
 ---
 

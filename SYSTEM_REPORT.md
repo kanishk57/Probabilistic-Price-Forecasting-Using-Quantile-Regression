@@ -95,9 +95,14 @@ While the model is near-random at predicting exact direction, it is **highly cal
 
 ## 5. Strategy Performance (Trading Evaluation)
 
-### 5.1 Equity Curve
-The equity curve shows steady growth with managed drawdowns. Capital never breached the starting $10,000.
-![Strategy Equity Curve](results/equity_curve.png)
+### 5.1 Equity Curves
+The primary growth trajectory shows the effectiveness of confidence-filtered entries.
+
+**Standard Equity Curve (Trade-based):**
+![Standard Equity Curve](results/equity_curve.png)
+
+**Enhanced Equity Curve (High-Resolution):**
+![Enhanced Smoother Curve](results/final_equity_curve.png)
 
 ### 5.2 Risk Metrics
 * **Max Drawdown**: $1,368.90

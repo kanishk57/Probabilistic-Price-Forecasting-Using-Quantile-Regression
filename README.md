@@ -95,8 +95,9 @@ The system includes an institutional-grade strategy that trades only when there 
 | **Total ROI** | **+9.06%** | Solid $906 profit on a $10k account ($152 trades). |
 | **Drawdown** | **$1,368.90** | Managed via model-informed partial exits. |
 
-**Final Equity Curve:**
+**Final Equity Curves:**
 ![Institutional Strategy Equity Curve](results/equity_curve.png)
+![Smoother Institutional Equity Curve](results/final_equity_curve.png)
 
 ---
 

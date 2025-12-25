@@ -89,11 +89,14 @@ The system includes an institutional-grade strategy that trades only when there 
 
 | Metric | Result (Out-of-Sample) | Analysis |
 | :--- | :--- | :--- |
-| **Win Rate** | **48.7%** | Steady performance with high Reward/Risk focus. |
+| **Win Rate** | **48.7%** | Precision over quantity—trades only high-quality distributions. |
 | **Profit Factor** | **1.09** | Gross profit is 1.09x larger than gross loss. |
 | **Expectancy** | **$5.96** | Mathematically positive edge per trade. |
 | **Total ROI** | **+9.06%** | Solid $906 profit on a $10k account ($152 trades). |
-| **Drawdown** | **$1,368.90** | Volatility managed via model-informed partial exits. |
+| **Drawdown** | **$1,368.90** | Managed via model-informed partial exits. |
+
+**Final Equity Curve:**
+![Institutional Strategy Equity Curve](results/equity_curve.png)
 
 ---
 
@@ -108,8 +111,13 @@ The system includes an institutional-grade strategy that trades only when there 
    ```bash
    # Executes the v3 strategy with partial exits and dynamic SL/TP
    python scripts/run_institutional_backtest.py
+   
+   # Visualize the equity curve
+   python scripts/visualize_equity.py
    ```
 
 3. **Check Output**:
    - Detailed logs: `results/institutional_backtest.csv`
+   - Static Equity Curve: `results/equity_curve.png`
+   - Interactive Dashboard: `results/equity_curve.html`
    - Forecast View: `results/forecast_viz.html`
